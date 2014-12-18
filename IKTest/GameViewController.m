@@ -15,7 +15,7 @@
     [super viewDidLoad];
 
     // create a new scene
-    SCNScene *scene = [SCNScene sceneNamed:@"art.scnassets/ship.dae"];
+    SCNScene *scene = [SCNScene sceneNamed:@"TestArm.dae"];
 
     // create and add a camera to the scene
     SCNNode *cameraNode = [SCNNode node];
@@ -23,7 +23,7 @@
     [scene.rootNode addChildNode:cameraNode];
     
     // place the camera
-    cameraNode.position = SCNVector3Make(0, 0, 15);
+    cameraNode.position = SCNVector3Make(0, 0, 30);
     
     // create and add a light to the scene
     SCNNode *lightNode = [SCNNode node];
@@ -39,12 +39,36 @@
     ambientLightNode.light.color = [UIColor darkGrayColor];
     [scene.rootNode addChildNode:ambientLightNode];
     
-    // retrieve the ship node
-    SCNNode *ship = [scene.rootNode childNodeWithName:@"ship" recursively:YES];
+    //　部位ごとのNodeの作成
+    //　モデル全体
+    SCNNode *arm = [scene.rootNode childNodeWithName:@"Arm" recursively:YES];
+    //　モデルの根っこ
+    SCNNode *arm_root = [arm childNodeWithName:@"RootBone" recursively:YES];
+    //　モデルの末端
+    SCNNode *arm_end = [arm childNodeWithName:@"BoneC" recursively:YES];
+    
+    //　モデルの各ノード
+    arm_A = [arm childNodeWithName:@"BoneA" recursively:YES];
+    arm_B = [arm childNodeWithName:@"BoneB" recursively:YES];
+    
+    //　SCNIKConstraint:IKの用意
+    SCNIKConstraint *ik = [SCNIKConstraint inverseKinematicsConstraintWithChainRootNode:arm_root];
+    //　モデルの末端に拘束条件として先ほど用意したIKを設定する
+    arm_end.constraints = @[ik];
+    ik.influenceFactor = 1.0;
+    
+    //　試しに動かしてみる
+    [SCNTransaction begin];
+    //　目標位置をSCNIKConstraintに与える
+    ik.targetPosition = [scene.rootNode convertPosition:SCNVector3Make(1,-1,0) toNode:nil];
+    
+    [SCNTransaction commit];
     
     // animate the 3d object
-    [ship runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:2 z:0 duration:1]]];
-    
+    /*
+    [arm runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:2 z:0 duration:1]]];
+    */
+     
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
     
@@ -70,6 +94,12 @@
 
 - (void) handleTap:(UIGestureRecognizer*)gestureRecognize
 {
+    
+    
+    NSLog(@"BoneA.rotate.x:%.2f", arm_A.presentationNode.eulerAngles.x);
+    NSLog(@"BoneB.rotate.x:%.2f", arm_B.presentationNode.eulerAngles.x);
+    
+    
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
     

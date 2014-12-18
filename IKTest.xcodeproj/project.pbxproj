@@ -15,6 +15,7 @@
 		ED22D38C1A42691800255794 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED22D38B1A42691800255794 /* Images.xcassets */; };
 		ED22D38F1A42691800255794 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED22D38D1A42691800255794 /* LaunchScreen.xib */; };
 		ED22D39B1A42691800255794 /* IKTestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ED22D39A1A42691800255794 /* IKTestTests.m */; };
+		ED22D3A51A426A7A00255794 /* TestArm.dae in Resources */ = {isa = PBXBuildFile; fileRef = ED22D3A41A426A7A00255794 /* TestArm.dae */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		ED22D3941A42691800255794 /* IKTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IKTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED22D3991A42691800255794 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED22D39A1A42691800255794 /* IKTestTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IKTestTests.m; sourceTree = "<group>"; };
+		ED22D3A41A426A7A00255794 /* TestArm.dae */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml.dae; path = TestArm.dae; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 			children = (
 				ED22D3801A42691800255794 /* AppDelegate.h */,
 				ED22D3811A42691800255794 /* AppDelegate.m */,
+				ED22D3A41A426A7A00255794 /* TestArm.dae */,
 				ED22D3831A42691800255794 /* art.scnassets */,
 				ED22D3851A42691800255794 /* GameViewController.h */,
 				ED22D3861A42691800255794 /* GameViewController.m */,
@@ -204,6 +207,7 @@
 			files = (
 				ED22D38F1A42691800255794 /* LaunchScreen.xib in Resources */,
 				ED22D38C1A42691800255794 /* Images.xcassets in Resources */,
+				ED22D3A51A426A7A00255794 /* TestArm.dae in Resources */,
 				ED22D3841A42691800255794 /* art.scnassets in Resources */,
 				ED22D38A1A42691800255794 /* Main.storyboard in Resources */,
 			);

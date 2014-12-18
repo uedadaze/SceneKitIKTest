@@ -10,6 +10,13 @@
 #import <SceneKit/SceneKit.h>
 
 @interface GameViewController : UIViewController{
+    SCNScene *scene;
+    
+    SCNIKConstraint *ik;
+    
+    SCNNode *arm;
+    SCNNode *arm_root;
+    SCNNode *arm_end;
     SCNNode *arm_A;
     SCNNode *arm_B;
 }

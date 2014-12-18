@@ -15,7 +15,7 @@
     [super viewDidLoad];
 
     // create a new scene
-    SCNScene *scene = [SCNScene sceneNamed:@"TestArm.dae"];
+    scene = [SCNScene sceneNamed:@"TestArm.dae"];
 
     // create and add a camera to the scene
     SCNNode *cameraNode = [SCNNode node];
@@ -41,18 +41,18 @@
     
     //　部位ごとのNodeの作成
     //　モデル全体
-    SCNNode *arm = [scene.rootNode childNodeWithName:@"Arm" recursively:YES];
+    arm = [scene.rootNode childNodeWithName:@"Arm" recursively:YES];
     //　モデルの根っこ
-    SCNNode *arm_root = [arm childNodeWithName:@"RootBone" recursively:YES];
+    arm_root = [arm childNodeWithName:@"RootBone" recursively:YES];
     //　モデルの末端
-    SCNNode *arm_end = [arm childNodeWithName:@"BoneC" recursively:YES];
+    arm_end = [arm childNodeWithName:@"BoneC" recursively:YES];
     
     //　モデルの各ノード
     arm_A = [arm childNodeWithName:@"BoneA" recursively:YES];
     arm_B = [arm childNodeWithName:@"BoneB" recursively:YES];
     
     //　SCNIKConstraint:IKの用意
-    SCNIKConstraint *ik = [SCNIKConstraint inverseKinematicsConstraintWithChainRootNode:arm_root];
+    ik = [SCNIKConstraint inverseKinematicsConstraintWithChainRootNode:arm_root];
     //　モデルの末端に拘束条件として先ほど用意したIKを設定する
     arm_end.constraints = @[ik];
     ik.influenceFactor = 1.0;
@@ -60,80 +60,42 @@
     //　試しに動かしてみる
     [SCNTransaction begin];
     //　目標位置をSCNIKConstraintに与える
-    ik.targetPosition = [scene.rootNode convertPosition:SCNVector3Make(1,-1,0) toNode:nil];
+    ik.targetPosition = [scene.rootNode convertPosition:SCNVector3Make(0,-1,0) toNode:nil];
     
     [SCNTransaction commit];
-    
-    // animate the 3d object
-    /*
-    [arm runAction:[SCNAction repeatActionForever:[SCNAction rotateByX:0 y:2 z:0 duration:1]]];
-    */
      
     // retrieve the SCNView
     SCNView *scnView = (SCNView *)self.view;
     
     // set the scene to the view
     scnView.scene = scene;
-    
-    // allows the user to manipulate the camera
-    scnView.allowsCameraControl = YES;
         
     // show statistics such as fps and timing information
     scnView.showsStatistics = YES;
 
     // configure the view
     scnView.backgroundColor = [UIColor blackColor];
-    
-    // add a tap gesture recognizer
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    NSMutableArray *gestureRecognizers = [NSMutableArray array];
-    [gestureRecognizers addObject:tapGesture];
-    [gestureRecognizers addObjectsFromArray:scnView.gestureRecognizers];
-    scnView.gestureRecognizers = gestureRecognizers;
 }
 
-- (void) handleTap:(UIGestureRecognizer*)gestureRecognize
-{
-    
-    
-    NSLog(@"BoneA.rotate.x:%.2f", arm_A.presentationNode.eulerAngles.x);
-    NSLog(@"BoneB.rotate.x:%.2f", arm_B.presentationNode.eulerAngles.x);
-    
-    
-    // retrieve the SCNView
-    SCNView *scnView = (SCNView *)self.view;
-    
-    // check what nodes are tapped
-    CGPoint p = [gestureRecognize locationInView:scnView];
-    NSArray *hitResults = [scnView hitTest:p options:nil];
-    
-    // check that we clicked on at least one object
-    if([hitResults count] > 0){
-        // retrieved the first clicked object
-        SCNHitTestResult *result = [hitResults objectAtIndex:0];
-        
-        // get its material
-        SCNMaterial *material = result.node.geometry.firstMaterial;
-        
-        // highlight it
-        [SCNTransaction begin];
-        [SCNTransaction setAnimationDuration:0.5];
-        
-        // on completion - unhighlight
-        [SCNTransaction setCompletionBlock:^{
-            [SCNTransaction begin];
-            [SCNTransaction setAnimationDuration:0.5];
-            
-            material.emission.contents = [UIColor blackColor];
-            
-            [SCNTransaction commit];
-        }];
-        
-        material.emission.contents = [UIColor redColor];
-        
-        [SCNTransaction commit];
-    }
+//　画面内をタッチしてIKの目標地点を動かす
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
+    //　タッチイベントの取得
+    UITouch *touch = [touches anyObject];
+    //　タッチの位置
+    CGPoint touchPoint =[touch locationInView:self.view];
+    //　画面の大きさ
+    float screenW = self.view.frame.size.width;
+    float screenH = self.view.frame.size.height;
+    //　移動先の座標の設定
+    float movetoX = ((touchPoint.x - screenW/2.0)*8.0)/screenW;
+    float movetoY = ((touchPoint.y - screenH/2.0)*8.0)/screenH*-1.0;
+    //　IKの目標地点を設定（これで動く）
+    ik.targetPosition = [scene.rootNode convertPosition:SCNVector3Make(movetoX,movetoY,0) toNode:nil];
+    //　各ノードの角度を取ってみる
+    NSLog(@"armA.angle.x:%.2f",arm_A.presentationNode.eulerAngles.x);
+    NSLog(@"armB.angle.x:%.2f",arm_B.presentationNode.eulerAngles.x);
 }
+
 
 - (BOOL)shouldAutorotate
 {

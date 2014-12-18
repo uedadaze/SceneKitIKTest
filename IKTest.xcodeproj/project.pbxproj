@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		ED22D37F1A42691800255794 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ED22D37E1A42691800255794 /* main.m */; };
 		ED22D3821A42691800255794 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ED22D3811A42691800255794 /* AppDelegate.m */; };
-		ED22D3841A42691800255794 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = ED22D3831A42691800255794 /* art.scnassets */; };
 		ED22D3871A42691800255794 /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED22D3861A42691800255794 /* GameViewController.m */; };
 		ED22D38A1A42691800255794 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED22D3881A42691800255794 /* Main.storyboard */; };
 		ED22D38C1A42691800255794 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED22D38B1A42691800255794 /* Images.xcassets */; };
@@ -34,7 +33,6 @@
 		ED22D37E1A42691800255794 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ED22D3801A42691800255794 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ED22D3811A42691800255794 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ED22D3831A42691800255794 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		ED22D3851A42691800255794 /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		ED22D3861A42691800255794 /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		ED22D3891A42691800255794 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,7 +86,6 @@
 				ED22D3801A42691800255794 /* AppDelegate.h */,
 				ED22D3811A42691800255794 /* AppDelegate.m */,
 				ED22D3A41A426A7A00255794 /* TestArm.dae */,
-				ED22D3831A42691800255794 /* art.scnassets */,
 				ED22D3851A42691800255794 /* GameViewController.h */,
 				ED22D3861A42691800255794 /* GameViewController.m */,
 				ED22D3881A42691800255794 /* Main.storyboard */,
@@ -208,7 +205,6 @@
 				ED22D38F1A42691800255794 /* LaunchScreen.xib in Resources */,
 				ED22D38C1A42691800255794 /* Images.xcassets in Resources */,
 				ED22D3A51A426A7A00255794 /* TestArm.dae in Resources */,
-				ED22D3841A42691800255794 /* art.scnassets in Resources */,
 				ED22D38A1A42691800255794 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -420,6 +416,7 @@
 				ED22D3A01A42691800255794 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED22D3A11A42691800255794 /* Build configuration list for PBXNativeTarget "IKTestTests" */ = {
 			isa = XCConfigurationList;
@@ -428,6 +425,7 @@
 				ED22D3A31A42691800255794 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
